@@ -1,12 +1,15 @@
 package com.demoqa.core;
 
+import com.demoqa.utils.MyTestWatcher;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
+@ExtendWith(MyTestWatcher.class)
 public class TestBase {
 
     protected WebDriver driver;
