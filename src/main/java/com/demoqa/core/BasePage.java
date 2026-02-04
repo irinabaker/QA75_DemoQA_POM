@@ -1,10 +1,8 @@
 package com.demoqa.core;
 
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,12 +14,14 @@ public abstract class BasePage {
     protected WebDriver driver;
     public static JavascriptExecutor js;
     public static SoftAssertions softly;
+    public static Actions actions;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         js = (JavascriptExecutor) driver;
         softly = new SoftAssertions();
+        actions = new Actions(driver);
     }
 
     public void scrollWithJS(int x, int y) {
@@ -72,5 +72,19 @@ public abstract class BasePage {
 
     public boolean containsText(String title, WebElement element) {
         return element.getText().contains(title);
+    }
+
+    public boolean isElementVisible(WebElement element) {
+        try {
+            element.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+            return false;
+        }
+    }
+
+    public void waitOfElementVisibility(WebElement element,int time) {
+        getWait(time).until(ExpectedConditions.visibilityOf(element));
     }
 }
