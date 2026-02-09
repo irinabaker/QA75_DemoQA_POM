@@ -106,16 +106,18 @@ public abstract class BasePage {
             HttpURLConnection connection = (HttpURLConnection) linkUrl.openConnection();
             connection.setConnectTimeout(5000);
             connection.connect();
-            if (connection.getResponseCode()>=400) {
+            int statusCode = connection.getResponseCode();
+            if (statusCode >=400) {
                // System.out.println(url + " -> " + connection.getResponseMessage() + " is a BROKEN link");
             softly.fail(url + " -> " + connection.getResponseMessage() + " is a BROKEN link");
             } else {
               //  System.out.println(url + " -> " + connection.getResponseMessage());
-                softly.assertThat(connection.getResponseCode()).isLessThan(400);
+                softly.assertThat(statusCode).isLessThan(400);
             }
         } catch (Exception e) {
-            System.out.println(url + " -> " + " ERROR occurred");
+           // System.out.println(url + " -> " + " ERROR occurred");
+            softly.fail(url + " -> " + " ERROR occurred");
         }
-        softly.assertAll();
+
     }
 }

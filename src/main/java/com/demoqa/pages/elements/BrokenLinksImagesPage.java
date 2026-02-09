@@ -22,6 +22,7 @@ public class BrokenLinksImagesPage extends BasePage {
             String url = element.getDomAttribute("href");
             verifyLinks(url);
         }
+        softly.assertAll();
         return this;
     }
 
@@ -47,7 +48,8 @@ public class BrokenLinksImagesPage extends BasePage {
                     softly.fail("BROKEN image is " + imageUrl);
                 }
             } catch (Exception e) {
-                System.out.println("ERROR occurred");
+               // System.out.println("ERROR occurred");
+                softly.fail("ERROR occurred");
             }
         }
         softly.assertAll();
