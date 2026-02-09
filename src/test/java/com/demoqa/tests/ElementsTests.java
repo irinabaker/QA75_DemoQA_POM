@@ -3,8 +3,7 @@ package com.demoqa.tests;
 import com.demoqa.core.TestBase;
 import com.demoqa.pages.HomePage;
 import com.demoqa.pages.SidePanel;
-import com.demoqa.pages.elements.ButtonsPage;
-import com.demoqa.pages.elements.TextBoxPage;
+import com.demoqa.pages.elements.*;
 import com.demoqa.utils.MyArgumentsProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +16,16 @@ public class ElementsTests extends TestBase {
     SidePanel sidePanel;
     ButtonsPage buttons;
     TextBoxPage textBox;
+    BrokenLinksImagesPage brokenLinksImages;
+    UploadPage upload;
 
     @BeforeEach
     public void precondition() {
         sidePanel = new SidePanel(driver);
         buttons = new ButtonsPage(driver);
         textBox = new TextBoxPage(driver);
+        brokenLinksImages = new BrokenLinksImagesPage(driver);
+        upload = new UploadPage(driver);
         new HomePage(driver).getElements();
     }
 
@@ -64,5 +67,43 @@ public class ElementsTests extends TestBase {
         textBox.enterPersonalData(name,email,address)
                 .clickOnSubmitButton()
                 .verifyAddress();
+    }
+
+    @Test
+    public void javascriptExecutorTest() {
+        sidePanel.getTextBox();
+        textBox.enterPersonalDataWithJS("Jama Musiala", "jamal@gm.com")
+                .clickWithJavascript()
+                .getInnerText()
+                .verifyURL()
+                .navigateToNewPage("https://ilcarro.web.app")
+                .verifyNewPageTitle()
+                ;
+    }
+
+    @Test
+    public void getAllLinksTest() {
+        sidePanel.getLinks();
+        new LinksPage(driver).getAllLinks();
+    }
+
+    @Test
+    public void checkBrokenLinksTest() {
+        sidePanel.getBrokenLinksImages();
+        brokenLinksImages.checkBrokenLinks();
+    }
+
+    @Test
+    public void checkBrokenImages() {
+        sidePanel.getBrokenLinksImages();
+        brokenLinksImages.checkBrokenImages();
+    }
+
+    @Test
+    public void performKeyEventsWithRobotTest() {
+        sidePanel.getUpload();
+        upload.performKeyEvent()
+              //  .verifyFilePath("")
+          ;
     }
 }

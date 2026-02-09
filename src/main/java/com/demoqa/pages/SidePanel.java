@@ -5,8 +5,7 @@ import com.demoqa.pages.alertsFrameWidows.AlertsPage;
 import com.demoqa.pages.alertsFrameWidows.IframesPage;
 import com.demoqa.pages.alertsFrameWidows.WindowsPage;
 import com.demoqa.pages.bookStore.LoginPage;
-import com.demoqa.pages.elements.ButtonsPage;
-import com.demoqa.pages.elements.TextBoxPage;
+import com.demoqa.pages.elements.*;
 import com.demoqa.pages.forms.PracticeFormPage;
 import com.demoqa.pages.interactions.DragAndDropPage;
 import com.demoqa.pages.widgets.MenuPage;
@@ -125,5 +124,29 @@ public class SidePanel extends BasePage {
     public PracticeFormPage getPracticeForm() {
         click(practiceForm);
         return new PracticeFormPage(driver);
+    }
+
+    @FindBy(xpath = "//span[.='Links']")
+    WebElement links;
+
+    public LinksPage getLinks() {
+        clickWithJS(links,0,500);
+        return new LinksPage(driver);
+    }
+
+    @FindBy(xpath = "//span[.='Broken Links - Images']")
+    WebElement brokenLinksImages;
+
+    public BrokenLinksImagesPage getBrokenLinksImages() {
+        clickWithJS(brokenLinksImages,0,500);
+        return new BrokenLinksImagesPage(driver);
+    }
+
+    @FindBy(xpath = "//span[.='Upload and Download']")
+    WebElement upload;
+
+    public UploadPage getUpload() {
+        clickWithJS(upload,0,600);
+        return new UploadPage(driver);
     }
 }
