@@ -6,6 +6,7 @@ import com.demoqa.pages.SidePanel;
 import com.demoqa.pages.bookStore.BookStorePage;
 import com.demoqa.pages.bookStore.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class BookStoreTests extends TestBase {
@@ -25,6 +26,7 @@ public class BookStoreTests extends TestBase {
     }
 
     @Test
+    @Tag("smoky")
     public void searchBookPositiveTest() {
         new BookStorePage(driver).enterBookName("Git")
                 .verifyBookName("Git");

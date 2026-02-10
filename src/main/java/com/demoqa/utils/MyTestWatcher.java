@@ -12,11 +12,13 @@ public class MyTestWatcher implements TestWatcher {
     @Override
     public void testSuccessful(ExtensionContext context) {
         logger.info("The method {} is PASSED",context.getDisplayName());
+        logger.info("=================================================");
     }
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
        logger.error("The method !!!{}!!! is FAILED",context.getDisplayName());
        logger.error("{}",cause.getMessage());
+       logger.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 }

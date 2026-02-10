@@ -120,4 +120,14 @@ public abstract class BasePage {
         }
 
     }
+
+    public void clickWithRectangle(WebElement element) {
+        Rectangle rectangle = element.getRect();
+
+        int xOffset = rectangle.getWidth() / 4;
+        int yOffset = rectangle.getHeight() / 2;
+
+        actions.moveToElement(element).perform();
+        actions.moveByOffset(-xOffset,-yOffset).click().perform();
+    }
 }
