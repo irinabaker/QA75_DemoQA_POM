@@ -57,11 +57,6 @@ public class MyListener implements WebDriverListener {
     }
 
     @Override
-    public void afterPerform(WebDriver driver, Collection<Sequence> actions) {
-        logger.info("{}",actions);
-    }
-
-    @Override
     public void afterClick(WebElement element) {
         logger.info("We clicked on {}",element);
     }
